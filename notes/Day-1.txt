@@ -93,3 +93,14 @@ property object (props):
 used to pass data from parent to nested
 react js passes an object containing properties (attributes that you used while declaring the component as custom HTML tag in JSX/TSX syntax) with values (that you have assigned to those attributes) to the called component as an argument
 this props object is immutable
+
+
+how to display list of items in react
+importance of "key" property of RE
+
+children props
+
+effect hook: useEffect()
+reducer hooks: useReducer()
+
+fetching data from RESTful API
