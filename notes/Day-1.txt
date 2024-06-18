@@ -57,3 +57,8 @@ state hook =>
 	const setValueState = arr[1]
 
 	const [valueState, setValueState]= useState<number>(0)
+
+
+state => intrinsic part of a component, It is NEVER shared with other components
+
+shared storage => one component can save data and another can get the data
