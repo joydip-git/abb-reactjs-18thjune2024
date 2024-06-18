@@ -6,7 +6,6 @@
 
 2. create-react-app tool
 
-
 in React Component's design only one root react element can be present
 
 JavaScript or TypeScript XML
@@ -57,8 +56,40 @@ state hook =>
 	const setValueState = arr[1]
 
 	const [valueState, setValueState]= useState<number>(0)
-
-
-state => intrinsic part of a component, It is NEVER shared with other components
-
 shared storage => one component can save data and another can get the data
+
+
+state => intrinsic part of a component. state of one component is NEVER shared with other components.
+React observes the state and if the state data is updated, React re-renders the component (creates fresh VDOM by returning the React Element of the component). this latest VDOM is compared with previous version of the same VDOM by React to understand the changes and thus updates the UI (partially)
+state is immutable. mutate immutably (using setState method or the reducer function provided by useState hook).
+
+state can be availed thorugh "state" property of class component
+state can be availed through "useState" hook in functional component
+
+class component's state property:
+state property must be assigned to an object. it can't be of any other types. 
+you can have ONLY ONE state in a class component
+all data should be saved in the state object via several properties.
+React provides "setState" method (from base class Component) to update the state
+to setState() method you should a new state object with the selected properties with updated data
+setState() updates state property by merging both old and new state asynchronously
+after setState has finished the state updation it calls the component's render() method
+
+
+state hook of functional component:
+useState hook returns the data (state) and a function to update the state (reducer function)
+example: const [valueState, setValueState]= useState<number>(0)
+Note: useState() uses one more hook behind the scene=> useReducer()
+
+state can be assigned not only to an object, but it can't be of any other types, such as number, string, boolean, array etc.
+you can have as many states as you want in a functional component
+in each state, you can save data
+reducer function provided by useState hook can be used to update the state
+to the reducer function you have to pass data of the same type as that of the state
+reducer function updates state by replacing old state by new state asynchronously
+after reducer function has finished the state updation it calls the component function again
+
+property object (props):
+used to pass data from parent to nested
+react js passes an object containing properties (attributes that you used while declaring the component as custom HTML tag in JSX/TSX syntax) with values (that you have assigned to those attributes) to the called component as an argument
+this props object is immutable
