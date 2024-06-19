@@ -1,10 +1,28 @@
-import usePeopleState from '../../hooks/usePeopleState'
+import { useState } from 'react'
+//import usePeopleState from '../../hooks/usePeopleState'
 import PersonDetail from '../person-detail/PersonDetail'
+import PostFilter from '../post-filter/PostFilter'
+import { people } from '../../data/people'
 
 const PersonList = () => {
-    const [peopleState, updatePeopleState] = usePeopleState()
+    //const [peopleState, updatePeopleState] = usePeopleState()
+    const [peopleState, updatePeopleState] = useState(people)
+    const [filterText, setFilterText] = useState('')
 
-    const transformedArray =
+    const filterTextHandler = (text: string) => {
+        setFilterText(text)
+        if (text !== '') {
+            const filteredPeople =
+                peopleState
+                    .filter(p => p.name
+                        .toLocaleLowerCase()
+                        .includes(text.toLocaleLowerCase())
+                    )
+            updatePeopleState(filteredPeople)
+        } else
+            updatePeopleState(people)
+    }
+    const peopleList =
         peopleState
             .map(
                 (p) => {
@@ -23,8 +41,12 @@ const PersonList = () => {
     }
     return (
         <div>
+            <PostFilter
+                filterValue={filterText}
+                filterValueHandler={filterTextHandler}
+            />
             <ul>
-                {transformedArray}
+                {peopleList}
             </ul>
             <br />
             <button

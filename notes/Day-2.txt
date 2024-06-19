@@ -21,3 +21,12 @@ return (
 
 
 useState<any|undefined>(undefined)
+
+browser api: fetch()
+3rd party package: axios
+
+RESTful API server:
+http://localhost:4000/people
+
+GET
+https://jsonplaceholder.typicode.com/posts
