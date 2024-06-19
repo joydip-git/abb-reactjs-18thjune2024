@@ -1,0 +1,15 @@
+import { Person } from "../models/person";
+
+export const people: Person[] = [{
+    name: 'anil',
+    id: 2,
+    salary: 3000
+}, {
+    name: 'sunil',
+    id: 1,
+    salary: 1000
+}, {
+    name: 'joydip',
+    id: 3,
+    salary: 2000
+}]
