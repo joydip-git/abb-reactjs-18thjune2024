@@ -14,6 +14,7 @@ export const getProduct = (id: number): Promise<AxiosResponse<ApiResponse<Produc
 }
 
 export const deleteProduct = (id: number): Promise<AxiosResponse<ApiResponse<Product>>> => {
+    console.log('service: ' + id);
     ////{ "message":"", "data":[{},{},..]|null}
     return axiosInstance.delete<ApiResponse<Product>>(`products/${id}`)
 }

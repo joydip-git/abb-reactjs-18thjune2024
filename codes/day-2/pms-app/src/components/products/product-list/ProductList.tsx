@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Product } from "../../../models/product";
 import ProductDetail from "../product-detail/ProductDetail";
-import { getProducts } from "../../../services/productservice";
+import { deleteProduct, getProducts } from "../../../services/productservice";
 import { AxiosResponse } from "axios";
 import { ApiResponse } from "../../../models/apiresponse";
 import styles from "./ProductList.module.css";
@@ -35,6 +35,23 @@ const ProductList = () => {
             )
     }
 
+    const deleteRecordHandler = (id: number) => {
+        console.log(id);
+        deleteProduct(id)
+            .then(
+                (response) => {
+                    const apiResponse = response.data
+                    if (apiResponse.data !== null) {
+                        loadData()
+                    } else {
+                        setErrorMessage(apiResponse.message)
+                    }
+                },
+                (err) => {
+                    setErrorMessage(err.message)
+                }
+            )
+    }
     let design: any;
     if (!fetchStatus) {
         design = <span>Loading...</span>
@@ -60,7 +77,11 @@ const ProductList = () => {
                     <tbody>
                         {
                             products.map(
-                                p => <ProductDetail key={p.productId} product={p} />
+                                p => <ProductDetail
+                                    key={p.productId}
+                                    product={p}
+                                    deleteProductHandler={deleteRecordHandler}
+                                />
                             )
                         }
                     </tbody>

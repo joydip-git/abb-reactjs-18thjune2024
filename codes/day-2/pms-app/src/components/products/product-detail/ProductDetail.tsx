@@ -3,11 +3,12 @@ import styles from "./ProductDetail.module.css";
 //import './ProductDetail.module.css'
 
 type ProductDetailPropType = {
-    product: Product
+    product: Product,
+    deleteProductHandler: (id: number) => void
 }
 
 const ProductDetail = (props: Readonly<ProductDetailPropType>) => {
-    const { product } = props
+    const { product, deleteProductHandler } = props
     return (
         <tr>
             <td>
@@ -22,7 +23,12 @@ const ProductDetail = (props: Readonly<ProductDetailPropType>) => {
             <td>{product.price}</td>
             <td>{product.starRating}</td>
             <td>
-                <button type="button">Delete</button>
+                <button type="button" onClick={
+                    () => {
+                        console.log(product);
+                        deleteProductHandler(product.productId)
+                    }
+                }>Delete</button>
             </td>
         </tr>
     )
