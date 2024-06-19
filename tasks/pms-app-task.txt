@@ -1,0 +1,16 @@
+create a react application => pmsapp
+create a component to display list of products 
+
+a. fetch data from backend-server using axios package
+note: create a file (service) with the method
+
+b. create the component => ProductList
+display image, name, price and rating of the product through a <table> element
+
+but for every row you need to create a small component => ProductDetail
+this component will return a <tr> element displaying a product object's properties 
+
+Note: 
+	create model to represent product data
+	create another model to represent the response from api
+	message, data => Product|Product[]|null
