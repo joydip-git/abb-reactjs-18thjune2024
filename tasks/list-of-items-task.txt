@@ -1,0 +1,4 @@
+create a model => Post
+create an array with the Post type objects
+render them using "map" method in the component
+use "key" property for React elements in the list
