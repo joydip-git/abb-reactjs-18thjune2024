@@ -1,4 +1,9 @@
 create a model => Post
 create an array with the Post type objects
-render them using "map" method in the component
+render the post array using "map" method in the component =>PostList
+display only post id (id property) and title of the post
 use "key" property for React elements in the list
+
+in the UI (PostList component deisgn) also keep a text box 
+in the text box you will enter name title of the post (partially/fully)
+based on the entered text the posts should be filtered and re-rendered
