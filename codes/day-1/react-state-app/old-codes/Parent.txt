@@ -21,6 +21,26 @@ class Parent extends Component {
         this.setState({
             data: 100
         })
+
+        or
+
+        this.setState(
+            (currentState) => {
+                return {
+                    data:currentState.data+1
+                }
+            }
+        )
+
+        or
+
+        this.setState(
+            (currentState, currentProps) => {
+                return {
+                    data: currentState.data + currentProps.incrementValueBy
+                }
+            }
+        )
     }
     render(): ReactNode {
         console.log('parent rendered');
