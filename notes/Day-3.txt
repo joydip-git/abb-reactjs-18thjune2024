@@ -1,0 +1,71 @@
+1. lifecycle of a component
+
+class Sample extends Component{
+	
+	constructor(props:any){
+		this.state={
+			data:[],
+			fetchStatus:false
+		}
+	}
+	componentDidMount(){
+		getProducts().then(r=> if(r.data.data !==null) this.setState({data:r.data.data, fetchStatus:true}))
+	}
+	render(){
+		if(this.state.fetchStatus === false)		
+			return <span> Loading...</span>
+		else
+			return <div>{this.state.data.map()}</div>
+	}
+}
+
+
+<Sample /> => new Sample().render()
+
+function Sample(){
+	return <div>Hello</div>
+}
+
+<Sample /> => Sample()
+
+mounting phase:
+1. constructor gets called => Side effect causing code should not be written in constructor. it gets executed only one time, ducring creation of the object
+
+2. render() method gets called => Side effect causing code should not be written in render() method directly. it gets executed every time
+
+3. componentDidMount event gets fired immediately after render
+so, if you write componentDidMount() method in your component that will be executed after render. this event gets fired ONLY once in the lifecycle of a class component, hence this method can be used to fetch data ONLY one time
+
+updation phase: 
+this phase is caused 
+	a. because the component received a fresh props object from parent
+	b. because the component's internal state got updated
+
+1. shouldComponentUpdate  event gets fired every time except the very first time (mounting) before render(). the method to hook to the event must return a boolean value. the method should have logic to prevent unnecessary rendering of a component
+if the method returns true, render() method and any other subsequent lifeccyle methods will be invoked, else none of them will not be invoked
+
+2. render() method gets called
+3. componentDidUpdate event gets fired every time except the very first time (mounting)
+if you write componentDidMount() method in your component that will be executed after render(). this method can be used to fetch data and update state every time the component receives fresh property value of component's internal state gets updated
+
+
+error phase:
+//shouldDerivedState
+componentDidCatch()
+
+
+destruction phase:
+componentWillUnmount() => this event gets fired only one time when the component is destroyed (just before destruction). in that method you can write resource clean-up code
+
+ctor => render() [Loading...] 	=> CDM 
+	  => render()[list]		
+	  selecting an id		
+	  => render() 
+				=> ctor => render (loading..) => CDM [1]
+						  => 
+	
+
+
+
+
+
