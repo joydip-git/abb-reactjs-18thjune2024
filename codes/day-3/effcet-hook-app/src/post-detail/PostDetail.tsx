@@ -24,7 +24,6 @@ const PostDetail = (props: Readonly<PostDetailPropType>) => {
             setErrorInfo(error.message)
         }
     }
-
     useEffect(
         () => {
             console.log('PD data fetching');
@@ -57,5 +56,5 @@ const PostDetail = (props: Readonly<PostDetailPropType>) => {
         )
 }
 
-//PostDetail = memo(PostDetail)
 export default memo(PostDetail)
+//export default PostDetail

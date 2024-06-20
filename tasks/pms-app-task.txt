@@ -14,3 +14,9 @@ Note:
 	create model to represent product data
 	create another model to represent the response from api
 	message, data => Product|Product[]|null
+
+2nd update:
+a. remove the "Load Products" button and fetch data and display when the component is rendered (use effect hook) forthe very fisrt time (and only one time in its lifecycle)
+
+b. when the image in any row is clicked, immediately the complete product details should be displayed below the table using another component (again use effect hook to fetch data) 
+
