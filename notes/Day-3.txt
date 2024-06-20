@@ -22,12 +22,6 @@ class Sample extends Component{
 
 <Sample /> => new Sample().render()
 
-function Sample(){
-	return <div>Hello</div>
-}
-
-<Sample /> => Sample()
-
 mounting phase:
 1. constructor gets called => Side effect causing code should not be written in constructor. it gets executed only one time, ducring creation of the object
 
@@ -63,6 +57,87 @@ ctor => render() [Loading...] 	=> CDM
 	  => render() 
 				=> ctor => render (loading..) => CDM [1]
 						  => 
+
+
+function PostDetail(props:any){
+
+	const [post, setPost] = useState<Post>()
+
+	useEffect(
+		()=>{
+			fetch().then(resp=>... setPost(data))
+			return ()=>{
+				//clean up code
+			}
+		}
+	)
+
+	useEffect(
+	//componentDidUpdate
+		()=>{
+			fetch().then(resp=>... setPosts(data))
+			let x= 10
+			return ()=>{
+				//clean up code
+				x=0
+			}
+		},
+	  [props.selectedPostId,x,y,z]
+	)
+
+	useEffect(
+	//componentDidMount
+		()=>{
+			fetch().then(resp=>... setPosts(data))
+
+			//componentWillUnmount
+			return ()=>{
+				//clean up code
+			}
+		},
+	  []
+	)
+
+	if(!post)
+		return <span>...<span>
+	else
+		return <>....</>
+}
+
+show && <Sample /> => Sample()
+
+effect hook callback function does not get executed immediately
+it gets executed afetr the component returns react element (equivalent to => after render() method)
+if the that callback, passed to effect hook, in turn returns another callback, that is no executed immediately. it is executed first in the next cycle (next render) of the component
+
+function outer(){
+		let x = 100		
+		function inner(){
+			let y = x + 200
+			this.val = 10
+			clg(y)
+		}	
+		return inner
+}
+
+const innerFn = outer()
+innerFn()
+
+HOC => 
+function memo(c:any){
+	class X extends Component{
+		shouldComponentUpdate(nextProps, nextState){
+			//logic
+		}
+
+		render(){
+			return <c />
+		}
+	}
+	return X
+}
+
+useMemo()
 	
 
 
