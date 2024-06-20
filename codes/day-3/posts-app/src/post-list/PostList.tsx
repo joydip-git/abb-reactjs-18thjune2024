@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Post } from '../models/post';
-import PostDetail from '../post-detail/PostDetail';
+import { Link } from 'react-router-dom';
 
 const PostList = () => {
     const [posts, setPosts] = useState<Post[]>([])
     const [errorInfo, setErrorInfo] = useState('')
     const [fetchStatus, setFetchStatus] = useState(false)
-    const [selectedId, setSelectedId] = useState(0)
-    const [count, setCount] = useState(0)
-
 
     const fetchPosts = async () => {
         try {
@@ -59,42 +56,22 @@ const PostList = () => {
                         {
                             posts.map(
                                 (p) => <tr key={p.id}>
-                                    <td
-                                        onClick={
-                                            () => setSelectedId(p.id)
-                                        }>
-                                        <strong> <u>{p.id}</u></strong>
+                                    <td>
+                                        <Link to={`/posts/view?pid=${p.id}`}>
+                                            <strong> <u>{p.id}</u></strong>
+                                        </Link>
                                     </td>
+
                                     <td>{p.title}</td>
                                 </tr>
                             )
                         }
                     </tbody>
-                </table>
-                <br />
-                {
-                    selectedId > 0 && <PostDetail selectedPostId={selectedId} />
-                }
+                </table >
             </>
         )
 
-    return (
-        <>
-            <div>
-                <span> Count &nbsp;{count}</span>
-                <br />
-                <button type="button" onClick={
-                    () => setCount(
-                        (oldCount) => oldCount + 1
-                    )
-                }>Increase</button>
-            </div>
-            <br />
-            {
-                design
-            }
-        </>
-    )
+    return design
 }
 
 export default PostList

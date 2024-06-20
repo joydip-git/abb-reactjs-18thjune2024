@@ -1,10 +1,21 @@
 //import { memo } from "react";
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Post } from '../models/post';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+//import { Link } from "react-router-dom";
 
-type PostDetailPropType = { selectedPostId: number }
 
-const PostDetail = ({ selectedPostId }: Readonly<PostDetailPropType>) => {
+const PostDetail = () => {
+
+    //const { id, x } = useParams() //{id:"1", "x":100}
+    let [searchParams, setSearchParams] = useSearchParams()
+    const selectedPostId = Number(searchParams.get('pid'))
+    // const selectedPostId = Number(id)
+    // console.log(x);
+    const navigate = useNavigate()
+
+    // let [searchParams, setSearchParams] = useSearchParams()
+    //console.log(searchParams.get('pid'));
 
     const [post, setPost] = useState<Post | undefined>(undefined)
     const [fetchStatus, setFetchStatus] = useState(false)
@@ -26,10 +37,6 @@ const PostDetail = ({ selectedPostId }: Readonly<PostDetailPropType>) => {
         }
     }
 
-    useMemo(
-        () => { return selectedPostId * 2 },
-        [selectedPostId]
-    )
     useEffect(
         () => {
             console.log('PD data fetching');
@@ -38,7 +45,7 @@ const PostDetail = ({ selectedPostId }: Readonly<PostDetailPropType>) => {
                 console.log('PD clean up');
             }
         },
-        [selectedPostId]
+        []
     )
 
     console.log('PD rendering...');
@@ -50,15 +57,25 @@ const PostDetail = ({ selectedPostId }: Readonly<PostDetailPropType>) => {
         return <span>no record</span>
     else
         return (
-            <div>
-                Id: &nbsp;<span>{post.id}</span>
+            <>
+                <div>
+                    Id: &nbsp;<span>{post.id}</span>
+                    <br />
+                    UserId: &nbsp;<span>{post.userId}</span>
+                    <br />
+                    Title: &nbsp;<span>{post.title}</span>
+                    <br />
+                    Body: &nbsp;<span>{post.body}</span>
+                </div>
                 <br />
-                UserId: &nbsp;<span>{post.userId}</span>
-                <br />
-                Title: &nbsp;<span>{post.title}</span>
-                <br />
-                Body: &nbsp;<span>{post.body}</span>
-            </div>
+                {/* <Link to={'/posts'}> */}
+                <button type="button" onClick={
+                    () => navigate('/posts')
+                }>
+                    Posts
+                </button>
+                {/* </Link> */}
+            </>
         )
 }
 

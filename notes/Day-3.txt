@@ -123,11 +123,18 @@ function outer(){
 const innerFn = outer()
 innerFn()
 
-HOC => 
-function memo(c:any){
+HOC => Higher order component
+design pattern in react
+
+function makeState(c:any){
 	class X extends Component{
 		shouldComponentUpdate(nextProps, nextState){
-			//logic
+			if(nexProps.propValue === this.props.proValue)
+				return false
+			else
+				return
+		}
+		state={
 		}
 
 		render(){
@@ -137,7 +144,29 @@ function memo(c:any){
 	return X
 }
 
-useMemo()
+function Sample(props:any){
+	useMemo(
+		()=>{
+			return props.data
+		},
+		[props.data]
+	)
+
+	return <div>....</div>
+}
+
+
+routing
+
+<BrowserRouter>
+<Routes>
+	<Route path='posts'>
+		<Route path='' element={<PostList />}/>
+		<Route path=':id' element={<PostDetail />}/>
+	</Route>
+	<Route path='*' element={<PageNotFound />}/>
+</Routes>
+</...>
 	
 
 

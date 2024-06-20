@@ -4,12 +4,13 @@ import styles from "./ProductDetail.module.css";
 
 type ProductDetailPropType = {
     product: Product,
-    deleteProductHandler: (id: number) => void
+    deleteProductHandler: (id: number) => void,
+    selectIdHandler: (id: number) => void
 }
 
 const ProductDetail = (props: Readonly<ProductDetailPropType>) => {
-    const { product, deleteProductHandler } = props
-    return (
+    const { product, deleteProductHandler, selectIdHandler } = props
+    const design = (
         <tr>
             <td>
                 <img
@@ -17,6 +18,9 @@ const ProductDetail = (props: Readonly<ProductDetailPropType>) => {
                     title={product.productName}
                     alt="NA"
                     className={styles.imgstyle}
+                    onClick={
+                        () => selectIdHandler(product.productId)
+                    }
                 />
             </td>
             <td>{product.productName}</td>
@@ -32,6 +36,8 @@ const ProductDetail = (props: Readonly<ProductDetailPropType>) => {
             </td>
         </tr>
     )
+    console.log('PDetail rendering...');
+    return design
 }
 
 export default ProductDetail
