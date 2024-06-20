@@ -24,6 +24,7 @@ const PostDetail = (props: Readonly<PostDetailPropType>) => {
             setErrorInfo(error.message)
         }
     }
+
     useEffect(
         () => {
             console.log('PD data fetching');
