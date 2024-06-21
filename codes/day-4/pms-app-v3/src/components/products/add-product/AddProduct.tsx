@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { Product } from "../../../models/product"
 import { addProduct } from "../../../services/productservice"
 import { useNavigate } from "react-router-dom"
@@ -16,23 +16,6 @@ const AddProduct = () => {
     const [price, setPrice] = useState(0)
     const [starRating, setStarRating] = useState(0)
 
-    // const [input, setInput] = useState<{ value: any, name: string, valErro: '' }>({ value: 0, name: 'productId', valErro: '' })
-
-    //const [inputError, setInputError] = useState('')
-    const idRef = useRef<HTMLInputElement>(null)
-
-
-    // const validate = () => {
-    //     console.log(idRef);
-    //     if (idRef !== null) {
-    //         if (idRef.current?.value === '')
-    //             setInputError('value required')
-    //         else {
-    //             setInputError('')
-    //         }
-    //     }
-    // }
-
     const submitProduct = async () => {
         if (window.confirm('like to submit?')) {
             const product: Product = {
@@ -45,7 +28,6 @@ const AddProduct = () => {
                 imageUrl: imageUrl,
                 price: price
             }
-            console.log(product);
             try {
                 const response = await addProduct(product)
                 const apiResponse = response.data
@@ -67,7 +49,6 @@ const AddProduct = () => {
                     <div className="form-group">
                         <label htmlFor="productId">Id:</label>
                         <input type="text"
-                            ref={idRef}
                             id="productId"
                             className="form-control"
                             placeholder="enter product id"

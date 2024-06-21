@@ -23,6 +23,37 @@ function Input(type, value, name, handler){
 }
 
 
+ref to an element and to a nested component
+context api
+redux
+
+
+state
+context api
+
+
+redux
+	=> and observable => ngrx, mobx, akita (Salesforce)
+
+Redux: npm i redux, npm i react-redux
+
+state: object
+reducer: function
+reducer map: object
+store: object
+dispatch: function
+action: object
+	type:'update_after_fetch'
+	payload:[]
+
+	type:'update_after_error'
+	payload:'error occurred'
+
+useReducer()
+
+
+
+
 
 
 
