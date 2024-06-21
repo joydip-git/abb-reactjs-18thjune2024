@@ -37,6 +37,8 @@ redux
 
 Redux: npm i redux, npm i react-redux
 
+latest: npm i @reduxjs/toolkit react-redux
+
 state: object
 reducer: function
 reducer map: object
@@ -50,6 +52,36 @@ action: object
 	payload:'error occurred'
 
 useReducer()
+
+
+useAuthService(){
+	const [s]= useState(new AuthService())
+	return s 
+}
+
+@injectable()
+class AuthService{
+}
+
+const svcRef =  new AuthService
+export default svcRef
+
+inversify reflect-metadata
+
+INITIAL_FETCH
+UPDATE_SUCCESS
+UPDATE_FAILURE
+
+interface PayloadAction<T>{
+	type:string;
+	payload:T
+}
+
+
+redux:
+	typed selector and typed dispatch in reduxjs/toolkit
+
+
 
 
 

@@ -1,5 +1,6 @@
 const { legacy_createStore, combineReducers, applyMiddleware } = require('redux')
 const { createLogger } = require('redux-logger')
+
 //state
 const initialCountState = {
     count: 0
@@ -86,6 +87,7 @@ const store = legacy_createStore(
     applyMiddleware(logger)
 )
 
+//components
 //console.log(store.getState());
 
 // store.dispatch({ type: actionTypes.INCREASE, payload: 3 })
