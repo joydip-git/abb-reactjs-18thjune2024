@@ -1,11 +1,14 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { Product } from "../../../models/product"
 import { getProduct } from "../../../services/productservice"
+import { useParams } from "react-router-dom"
 
-type ProductViewPropType = {
-    selectedProductId: number
-}
-const ProductView = ({ selectedProductId }: Readonly<ProductViewPropType>) => {
+
+const ProductView = () => {
+
+    const { id } = useParams()
+    const selectedProductId = Number(id)
+
     const [fetchStatus, setFetchStatus] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [productInfo, setProduct] = useState<Product | undefined>(undefined)
@@ -29,14 +32,12 @@ const ProductView = ({ selectedProductId }: Readonly<ProductViewPropType>) => {
             setFetchStatus(true)
         }
     }
-    useMemo(
-        () => selectedProductId, [selectedProductId]
-    )
+
     useEffect(
         () => {
             fetchProduct()
         },
-        [selectedProductId]
+        []
     )
 
     let design: any;

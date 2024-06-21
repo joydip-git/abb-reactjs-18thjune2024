@@ -1,27 +1,26 @@
+import { Link } from "react-router-dom";
 import { Product } from "../../../models/product"
 import styles from "./ProductDetail.module.css";
 //import './ProductDetail.module.css'
 
 type ProductDetailPropType = {
     product: Product,
-    deleteProductHandler: (id: number) => void,
-    selectIdHandler: (id: number) => void
+    deleteProductHandler: (id: number) => void
 }
 
 const ProductDetail = (props: Readonly<ProductDetailPropType>) => {
-    const { product, deleteProductHandler, selectIdHandler } = props
+    const { product, deleteProductHandler } = props
     const design = (
         <tr>
             <td>
-                <img
-                    src={product.imageUrl}
-                    title={product.productName}
-                    alt="NA"
-                    className={styles.imgstyle}
-                    onClick={
-                        () => selectIdHandler(product.productId)
-                    }
-                />
+                <Link to={`/products/view/${product.productId}`}>
+                    <img
+                        src={product.imageUrl}
+                        title={product.productName}
+                        alt="NA"
+                        className={styles.imgstyle}
+                    />
+                </Link>
             </td>
             <td>{product.productName}</td>
             <td>{product.price}</td>

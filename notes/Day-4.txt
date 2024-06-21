@@ -1,0 +1,18 @@
+1. routing
+2. redux
+3. forms
+4. context api
+
+http://localhost:3000/login => products
+http://localhost:3000/login?returnUrl=<original-path> =? <original-path>
+
+
+const guard:canActivateFn=()=>{
+}
+
+?x=10&y=20&z=30
+
+{x:10, y:20, z:30}
+queryParams.get('x')
+
+

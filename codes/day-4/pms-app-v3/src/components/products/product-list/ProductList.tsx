@@ -3,14 +3,12 @@ import { Product } from "../../../models/product";
 import ProductDetail from "../product-detail/ProductDetail";
 import { deleteProduct, getProducts } from "../../../services/productservice";
 import styles from "./ProductList.module.css";
-import ProductView from "../product-view/ProductView";
 
 const ProductList = () => {
 
     const [fetchStatus, setFetchStatus] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [products, setProducts] = useState<Product[]>([])
-    const [selectedId, setSelectedId] = useState(0)
 
     const loadData = async () => {
         try {
@@ -47,9 +45,7 @@ const ProductList = () => {
             alert(error.message)
         }
     }
-    const updateSelectedId = (id: number) => {
-        setSelectedId(id)
-    }
+
     useEffect(
         () => {
             loadData()
@@ -85,17 +81,11 @@ const ProductList = () => {
                                     key={p.productId}
                                     product={p}
                                     deleteProductHandler={deleteRecord}
-                                    selectIdHandler={updateSelectedId}
                                 />
                             )
                         }
                     </tbody>
                 </table>
-                <br />
-                <br />
-                {
-                    selectedId > 0 && <ProductView selectedProductId={selectedId} />
-                }
             </>
         )
     }

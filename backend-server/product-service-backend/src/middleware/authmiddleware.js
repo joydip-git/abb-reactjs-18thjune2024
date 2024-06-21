@@ -6,7 +6,7 @@ dotenv.config()
 
 const createToken = (user) => {
     const payload = { subject: user._id }
-    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: 600, })
+    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: 1200, })
     return token
 }
 

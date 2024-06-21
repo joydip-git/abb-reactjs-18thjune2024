@@ -10,6 +10,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        {/* <Route path='dev'> */}
         <Route index path='' element={<Home />} />
         <Route path='posts'>
           <Route path='' element={<PostList />} />
@@ -17,9 +18,8 @@ function App() {
           <Route path='view' element={<PostDetail />} />
         </Route>
         <Route path='*' element={<PageNotFound />} />
+        {/* </Route> */}
       </Routes>
-
-      <Outlet />
     </div>
   );
 }
