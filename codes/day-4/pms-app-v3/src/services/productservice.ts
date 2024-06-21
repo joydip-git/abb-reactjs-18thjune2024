@@ -26,5 +26,6 @@ export const updateProduct = (id: number, p: Product): Promise<AxiosResponse<Api
 
 export const addProduct = (p: Product): Promise<AxiosResponse<ApiResponse<Product>>> => {
     //{ "message":"", "data":[{},{},..]|null}
-    return axiosInstance.post<ApiResponse<Product>>(`products`)
+    return axiosInstance.post<ApiResponse<Product>>(
+        `products`, p)
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../../models/product";
-import ProductDetail from "../product-detail/ProductDetail";
+import ProductRow from "../product-row/ProductRow";
 import { deleteProduct, getProducts } from "../../../services/productservice";
 import styles from "./ProductList.module.css";
 
@@ -64,7 +64,7 @@ const ProductList = () => {
             <>
                 <h2>List of Products</h2>
                 <br />
-                <table>
+                <table className="table table-hover">
                     <thead className={styles.tblheadstyle}>
                         <tr>
                             <th>Image</th>
@@ -74,10 +74,10 @@ const ProductList = () => {
                             <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="table-dark">
                         {
                             products.map(
-                                p => <ProductDetail
+                                p => <ProductRow
                                     key={p.productId}
                                     product={p}
                                     deleteProductHandler={deleteRecord}

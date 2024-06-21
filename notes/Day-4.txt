@@ -15,4 +15,16 @@ const guard:canActivateFn=()=>{
 {x:10, y:20, z:30}
 queryParams.get('x')
 
+useRef() and ref
+
+function Input(type, value, name, handler){
+	useState()
+	return <Input type={type} value={value} name={name} onChange={handler}/>
+}
+
+
+
+
+
+
 

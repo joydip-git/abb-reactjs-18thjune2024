@@ -1,7 +1,11 @@
 import { Outlet } from 'react-router-dom'
 
 const ProductOutlet = () => {
-    return <Outlet />
+    return (
+        <div className='container container-fluid'>
+            <Outlet />
+        </div>
+    )
 }
 
 export default ProductOutlet
