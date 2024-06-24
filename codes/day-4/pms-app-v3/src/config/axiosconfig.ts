@@ -1,5 +1,6 @@
 import Axios from 'axios'
 import { API_BASE_URL } from './constants'
+import { TokenStorageService } from '../services/tokenstoageservice'
 
 const axiosInstance = Axios.create({
     baseURL: API_BASE_URL,
@@ -9,7 +10,11 @@ const axiosInstance = Axios.create({
 
 axiosInstance.interceptors.request.use(
     (requestConfig) => {
-        const token = localStorage.getItem('token')
+        //const token = localStorage.getItem('token')
+        const token = TokenStorageService
+            .instantiate()
+            .getToken()
+
         if (token) {
             const copy = { ...requestConfig }
             copy.headers.Authorization = `Bearer ${token}`

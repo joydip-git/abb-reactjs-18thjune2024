@@ -7,6 +7,7 @@ const AddProduct = () => {
 
     const navigate = useNavigate()
 
+    /*
     const [productId, setProductId] = useState('')
     const [productName, setProductName] = useState('')
     const [productCode, setProductCode] = useState('')
@@ -15,18 +16,38 @@ const AddProduct = () => {
     const [imageUrl, setImageUrl] = useState('')
     const [price, setPrice] = useState(0)
     const [starRating, setStarRating] = useState(0)
+    */
+    //now state of every input control value has been saved as part of form state
+    const [formData, setFormData] = useState({
+        productId: '',
+        productName: '',
+        productCode: '',
+        releaseDate: '',
+        description: '',
+        imageUrl: '',
+        price: '',
+        starRating: ''
+    });
+
+    const updateFormData = (propName: string, propValue: string) => {
+        setFormData((currentFormData) => ({
+            ...currentFormData,
+            [propName]: propValue
+        })
+        )
+    }
 
     const submitProduct = async () => {
         if (window.confirm('like to submit?')) {
             const product: Product = {
-                productId: Number(productId),
-                productName: productName,
-                productCode: productCode,
-                description: description,
-                releaseDate: releaseDate,
-                starRating: starRating,
-                imageUrl: imageUrl,
-                price: price
+                productId: Number(formData.productId),
+                productName: formData.productName,
+                productCode: formData.productCode,
+                description: formData.description,
+                releaseDate: formData.releaseDate,
+                starRating: Number(formData.starRating),
+                imageUrl: formData.imageUrl,
+                price: Number(formData.price)
             }
             try {
                 const response = await addProduct(product)
@@ -52,13 +73,11 @@ const AddProduct = () => {
                             id="productId"
                             className="form-control"
                             placeholder="enter product id"
-                            value={productId}
+                            value={formData.productId}
                             onChange={
-                                (e) => {
-                                    const val = e.target.value
-                                    if (val && val !== '')
-                                        setProductId(val)
-                                }
+                                (e) => updateFormData(
+                                    'productId', e.target.value
+                                )
                             }
                         />
                     </div>
@@ -69,13 +88,11 @@ const AddProduct = () => {
                             id="productName"
                             className="form-control"
                             placeholder="enter product name"
-                            value={productName}
+                            value={formData.productName}
                             onChange={
-                                (e) => {
-                                    const val = e.target.value
-                                    if (val && val !== '')
-                                        setProductName(val)
-                                }
+                                (e) => updateFormData(
+                                    'productName', e.target.value
+                                )
                             }
                         />
                     </div>
@@ -86,13 +103,11 @@ const AddProduct = () => {
                             id="productCode"
                             className="form-control"
                             placeholder="enter product code"
-                            value={productCode}
+                            value={formData.productCode}
                             onChange={
-                                (e) => {
-                                    const val = e.target.value
-                                    if (val && val !== '')
-                                        setProductCode(val)
-                                }
+                                (e) => updateFormData(
+                                    'productCode', e.target.value
+                                )
                             }
                         />
                     </div>
@@ -103,13 +118,11 @@ const AddProduct = () => {
                             id="description"
                             className="form-control"
                             placeholder="enter product description"
-                            value={description}
+                            value={formData.description}
                             onChange={
-                                (e) => {
-                                    const val = e.target.value
-                                    if (val && val !== '')
-                                        setDescription(val)
-                                }
+                                (e) => updateFormData(
+                                    'description', e.target.value
+                                )
                             }
                             cols={80}
                         ></textarea>
@@ -121,13 +134,11 @@ const AddProduct = () => {
                             id="releaseDate"
                             className="form-control"
                             placeholder="enter product releaseDate"
-                            value={releaseDate}
+                            value={formData.releaseDate}
                             onChange={
-                                (e) => {
-                                    const val = e.target.value
-                                    if (val && val !== '')
-                                        setReleaseDate(val)
-                                }
+                                (e) => updateFormData(
+                                    'releaseDate', e.target.value
+                                )
                             }
                         />
                     </div>
@@ -138,13 +149,12 @@ const AddProduct = () => {
                             id="price"
                             className="form-control"
                             placeholder="enter product price"
-                            value={price}
+                            value={formData.price}
                             onChange={
-                                (e) => {
-                                    const val = e.target.value
-                                    if (val && val !== '')
-                                        setPrice(Number(val))
-                                }
+                                (e) =>
+                                    updateFormData(
+                                        'price', e.target.value
+                                    )
                             }
                         />
                     </div>
@@ -155,13 +165,11 @@ const AddProduct = () => {
                             id="starRating"
                             className="form-control"
                             placeholder="enter product rating"
-                            value={starRating}
+                            value={formData.starRating}
                             onChange={
-                                (e) => {
-                                    const val = e.target.value
-                                    if (val && val !== '')
-                                        setStarRating(Number(val))
-                                }
+                                (e) => updateFormData(
+                                    'starRating', e.target.value
+                                )
                             }
                         />
                     </div>
@@ -172,13 +180,11 @@ const AddProduct = () => {
                             id="imageUrl"
                             className="form-control"
                             placeholder="enter product url"
-                            value={imageUrl}
+                            value={formData.imageUrl}
                             onChange={
-                                (e) => {
-                                    const val = e.target.value
-                                    if (val && val !== '')
-                                        setImageUrl(val)
-                                }
+                                (e) => updateFormData(
+                                    'imageUrl', e.target.value
+                                )
                             }
                         />
                     </div>

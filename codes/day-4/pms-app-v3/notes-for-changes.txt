@@ -1,0 +1,15 @@
+Introduction of TokenStorageService (in services folder)
+    localstorage has been replaced by a TokenService class using a BehaviorSubject as storage of token.
+    the token service class provides several methods to save token, get token, check whether user is logged in or not as well to remove the token
+    for this purpose "rxjs" package has been installed (npm i rxjs). 
+    to know more about Observable, Behavior subject etc. refer the following link: https://rxjs.dev/guide/overview
+
+Changes in existing code:
+    the code in axiosconfig.ts file and codes in Login.tsx component and RouteGuard.tsx component in "auth" directory
+
+Subscription of Redux state in ProductDetail component (in products folder)
+local state has been replaced by state from Redux store in this component
+
+Validation in Login.tsx component
+
+Login and Logout buton used in Dashboard component

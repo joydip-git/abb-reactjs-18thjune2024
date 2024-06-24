@@ -1,6 +1,25 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { TokenStorageService } from "../../../services/tokenstoageservice"
+import { useEffect, useState } from "react"
 
 const DashBoard = () => {
+    const [tokenState, setTokenState] = useState('')
+    const navigate = useNavigate()
+
+    const tokenService = TokenStorageService.instantiate()
+
+    useEffect(
+        () => {
+            tokenService
+                .storeObservable
+                .subscribe({
+                    next: (token) => setTokenState(token),
+                    error: (err) => setTokenState('')
+                })
+        },
+        [tokenState]
+    )
+
     const dashBoardDesign = (
         <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
             <div className="container-fluid">
@@ -21,10 +40,38 @@ const DashBoard = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/products/add">ADD PRODUCT</Link>
                         </li>
+                        <li className="nav-item">
+                            {
+                                tokenState !== '' ?
+                                    (
+                                        <button type="button"
+                                            className="btn btn-primary"
+                                            onClick={
+                                                () => {
+                                                    tokenService.removeToken()
+                                                    navigate('/login')
+                                                }
+                                            }>
+                                            Logout
+                                        </button>
+                                    ) :
+                                    (
+                                        <button type="button"
+                                            className="btn btn-primary"
+                                            onClick={
+                                                () => navigate('/login')
+                                            }
+                                        >
+                                            Login
+                                        </button>
+                                    )
+                            }
+
+                        </li>
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav >
     )
     return dashBoardDesign
 }

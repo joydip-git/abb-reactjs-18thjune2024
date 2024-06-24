@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
-import { Product } from "../../../models/product"
+import { useEffect } from "react"
 import { getProduct } from "../../../services/productservice"
 import { Link, useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { AppStateType } from "../../../redux/store"
+import { fetchProductFailure, fetchProductInitiate, fetchProductSuccess } from "../../../redux/reducers"
 
 
 const ProductDetail = () => {
@@ -9,27 +11,38 @@ const ProductDetail = () => {
     const { id } = useParams()
     const selectedProductId = Number(id)
 
-    const [fetchStatus, setFetchStatus] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('')
-    const [productInfo, setProduct] = useState<Product | undefined>(undefined)
+    // const [fetchStatus, setFetchStatus] = useState(false)
+    // const [errorMessage, setErrorMessage] = useState('')
+    // const [productInfo, setProduct] = useState<Product | undefined>(undefined)
+
+    const { fetchStatus, errorMessage, productInfo } = useSelector((stateMap: AppStateType) => stateMap.productInfoState)
+    const dispatch = useDispatch()
 
     const fetchProduct = async () => {
+        const initiateAction = fetchProductInitiate()
+        dispatch(initiateAction)
         try {
             const response = await getProduct(selectedProductId)
             const apiResponse = response.data
             if (apiResponse.data !== null) {
-                setProduct(apiResponse.data)
-                setErrorMessage('')
-                setFetchStatus(true)
+                // setProduct(apiResponse.data)
+                // setErrorMessage('')
+                // setFetchStatus(true)
+                const successAction = fetchProductSuccess(apiResponse.data)
+                dispatch(successAction)
             } else {
-                setProduct(undefined)
-                setErrorMessage(apiResponse.message)
-                setFetchStatus(true)
+                // setProduct(undefined)
+                // setErrorMessage(apiResponse.message)
+                // setFetchStatus(true)
+                const failureAction = fetchProductFailure(apiResponse.message)
+                dispatch(failureAction)
             }
         } catch (error: any) {
-            setProduct(undefined)
-            setErrorMessage(error.message)
-            setFetchStatus(true)
+            // setProduct(undefined)
+            // setErrorMessage(error.message)
+            // setFetchStatus(true)
+            const failureAction = fetchProductFailure(error.message)
+            dispatch(failureAction)
         }
     }
 
